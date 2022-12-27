@@ -1,0 +1,65 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Lista de Contactos</title>
+</head>
+<body>
+<header>
+  <h1>Lista de contactos</h1>
+  <div>
+    <a href="/nuevo">
+      Añadir contacto
+    </a>
+  </div>
+</header>
+<main>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Celular</th>
+      <th>Email</th>
+      <th>Fecha de Nacimiento</th>
+      <th>Fecha de Registro</th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="contacto : ${contactoList}">
+      <td  th:text="${contacto.id}"></td>
+      <td  th:text="${contacto.nombre}"></td>
+      <td  th:text="${contacto.celular}"></td>
+      <td  th:text="${contacto.email}"></td>
+      <td  th:text="${#temporals.format(contacto.fechaNacimiento, 'dd/MM/YYYY')}"></td>
+      <td  th:text="${#temporals.format(contacto.fechaRegistro, 'dd/MM/YYYY hh:mm a')}"></td>
+      <td >
+        <a th:href="@{/{id}/editar/(id=${contacto.id})}">
+          Editar
+        </a>
+      </td>
+      <td>
+        <a href="#" onclick="eliminarContacto(this)">
+          Eliminar
+        </a>
+        <form th:action="@{/{id}/eliminar/(id=${contacto.id})}" method="post"></form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</main>
+<script>
+        function eliminarContacto(element){
+            let ok = confirm("¿Estás seguro de querer eliminar este contacto?")
+            if(ok){
+                element.nextElementSibling.submit()
+            }
+        }
+    </script>
+</body>
+</html>

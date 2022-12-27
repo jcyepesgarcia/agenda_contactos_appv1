@@ -1,0 +1,49 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Registro de contacto</title>
+</head>
+<body>
+<main>
+  <div>
+    <div>
+      <h3>[[${contacto.id ne null ? 'Editar contacto' : 'Registro de contacto'}]] </h3>
+      <form action="" method="post" th:object="${contacto}">
+        <div>
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" placeholder="Ingrese el nombre del contacto" th:field="*{nombre}" >
+          <small th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+        </div>
+        <div>
+          <label for="celular">Celular:</label>
+          <input type="text" id="celular" placeholder="Ingrese el número telefónico del contacto" th:field="*{celular}">
+          <small th:if="${#fields.hasErrors('celular')}" th:errors="*{celular}" ></small>
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" id="email" placeholder="Ingrese el email del contacto" th:field="*{email}">
+          <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+        </div>
+        <div>
+          <label for="fechaNacimiento">Fecha de nacimiento:</label>
+          <input type="date" id="fechaNacimiento" th:field="*{fechaNacimiento}">
+          <small th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></small>
+        </div>
+        <div>
+          <button type="submit">
+            Guardar
+          </button>
+          <a href="/">
+            Cancelar
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+</body>
+</html>
